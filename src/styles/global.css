@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", ui-monospace, monospace;
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+  --color-amber-700: #b45309;
+}
+
+@layer base {
+  :root {
+    --accent: #b45309;
+  }
+
+  html.dark {
+    --accent: #f59e0b;
+  }
+
+  html {
+    font-family: var(--font-mono);
+    font-size: clamp(16px, 1.3vw, 18px);
+    background-color: #fafaf8;
+    color: #1a1a1a;
+  }
+
+  html.dark {
+    background-color: #0d0d0d;
+    color: #e8e8e8;
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: #fff;
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}

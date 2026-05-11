@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Resume — Bryan Loh" description="Resume of Bryan Loh, Software Engineer.">
+  <div class="flex items-center justify-between mb-8">
+    <p class="text-amber-700 dark:text-amber-400 text-sm opacity-80">$ open resume.pdf</p>
+    <a
+      href="/resume.pdf"
+      download
+      class="px-4 py-2 bg-amber-500 text-black font-bold text-sm hover:bg-amber-400 transition-colors"
+    >
+      download pdf
+    </a>
+  </div>
+
+  <div class="border border-current/10 w-full" style="height: 80vh;">
+    <iframe
+      src="/resume.pdf"
+      class="w-full h-full"
+      title="Bryan Loh Resume"
+    >
+      <p class="p-4 opacity-60 text-sm">
+        PDF preview not supported in your browser.
+        <a href="/resume.pdf" class="underline">Download the PDF directly.</a>
+      </p>
+    </iframe>
+  </div>
+</Layout>

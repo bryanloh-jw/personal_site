@@ -1,0 +1,80 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const categories = ['all', 'technical', 'career'] as const;
+---
+
+<Layout title="Blog — Bryan Loh" description="Writing on software engineering and career.">
+  <p class="text-amber-700 dark:text-amber-400 text-sm mb-8 opacity-80">$ ls ./posts --sort=date</p>
+
+  <div class="flex items-center justify-between mb-8">
+    <h1 class="text-2xl md:text-3xl font-bold">Blog</h1>
+    <span class="text-sm opacity-40">{allPosts.length} posts</span>
+  </div>
+
+  <div class="flex gap-3 mb-8" id="filter-tabs">
+    {categories.map(cat => (
+      <button
+        data-category={cat}
+        class:list={[
+          'text-sm px-3 py-1 border transition-colors cursor-pointer filter-btn',
+          cat === 'all'
+            ? 'border-amber-700 text-amber-700 dark:border-amber-400 dark:text-amber-400'
+            : 'border-current/20 opacity-50 hover:opacity-100',
+        ]}
+      >
+        {cat}
+      </button>
+    ))}
+  </div>
+
+  <div class="flex flex-col gap-4" id="posts-list">
+    {allPosts.map(post => (
+      <div data-category={post.data.category} class="post-item">
+        <PostCard
+          title={post.data.title}
+          description={post.data.description}
+          date={post.data.date}
+          slug={post.id}
+          category={post.data.category}
+          tags={post.data.tags}
+        />
+      </div>
+    ))}
+  </div>
+</Layout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const items = document.querySelectorAll<HTMLElement>('.post-item');
+  const isDark = () => document.documentElement.classList.contains('dark');
+
+  function activeClasses() {
+    return isDark()
+      ? ['border-amber-400', 'text-amber-400']
+      : ['border-amber-700', 'text-amber-700'];
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const selected = btn.dataset.category!;
+
+      buttons.forEach(b => {
+        b.classList.remove('border-amber-700', 'text-amber-700', 'border-amber-400', 'text-amber-400');
+        b.classList.add('border-current/20', 'opacity-50');
+      });
+      btn.classList.remove('border-current/20', 'opacity-50');
+      btn.classList.add(...activeClasses());
+
+      items.forEach(item => {
+        const match = selected === 'all' || item.dataset.category === selected;
+        item.style.display = match ? '' : 'none';
+      });
+    });
+  });
+</script>

@@ -1,11 +1,55 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
 ---
 
 <Layout>
-	<Welcome />
+  <section class="mb-16 md:mb-20">
+    <p class="text-amber-700 dark:text-amber-400 text-sm mb-4 opacity-80">$ whoami</p>
+    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-2">Bryan Loh - messwithyou</h1>
+    <p class="text-lg md:text-xl opacity-60 mb-6">Security Engineer | Software Engineer</p>
+    <p class="opacity-70 max-w-xl leading-relaxed mb-8 text-base md:text-lg">
+      I think like an attacker. I build like an engineer.
+    </p>
+    <div class="flex gap-4">
+      <a
+        href="/resume"
+        class="px-4 py-2 bg-amber-500 text-black font-bold text-sm hover:bg-amber-400 transition-colors"
+      >
+        view resume
+      </a>
+      <a
+        href="/blog"
+        class="px-4 py-2 border border-current/20 text-sm opacity-70 hover:opacity-100 transition-opacity"
+      >
+        read blog
+      </a>
+    </div>
+  </section>
+
+  {posts.length > 0 && (
+    <section>
+      <p class="text-amber-700 dark:text-amber-400 text-sm mb-4 opacity-80">$ ls ./posts</p>
+      <div class="flex flex-col gap-4">
+        {posts.map(post => (
+          <PostCard
+            title={post.data.title}
+            description={post.data.description}
+            date={post.data.date}
+            slug={post.id}
+            category={post.data.category}
+            tags={post.data.tags}
+          />
+        ))}
+      </div>
+      <div class="mt-6">
+        <a href="/blog" class="text-sm text-amber-700 dark:text-amber-400 hover:underline">all posts →</a>
+      </div>
+    </section>
+  )}
 </Layout>

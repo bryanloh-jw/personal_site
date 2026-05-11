@@ -1,0 +1,32 @@
+---
+import ThemeToggle from './ThemeToggle.tsx';
+
+const links = [
+  { href: '/', label: 'home' },
+  { href: '/about', label: 'about' },
+  { href: '/blog', label: 'blog' },
+  { href: '/resume', label: 'resume' },
+];
+
+const current = Astro.url.pathname;
+---
+
+<nav class="border-b border-current/10 py-3 px-4 md:py-4 md:px-6">
+  <div class="max-w-3xl mx-auto flex items-center justify-between gap-4">
+    <span class="text-amber-700 dark:text-amber-400 font-bold tracking-tight shrink-0">~/messwithyou</span>
+    <div class="flex items-center gap-3 md:gap-6 flex-wrap justify-end">
+      {links.map(({ href, label }) => (
+        <a
+          href={href}
+          class:list={[
+            'text-xs md:text-sm opacity-60 hover:opacity-100 transition-opacity',
+            { 'opacity-100 text-amber-700 dark:text-amber-400': current === href || (href !== '/' && current.startsWith(href)) },
+          ]}
+        >
+          {label}
+        </a>
+      ))}
+      <ThemeToggle client:load />
+    </div>
+  </div>
+</nav>

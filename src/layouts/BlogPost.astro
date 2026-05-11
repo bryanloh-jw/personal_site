@@ -1,0 +1,113 @@
+---
+import Layout from './Layout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  tags: string[];
+  category: 'technical' | 'career';
+}
+
+const { title, description, date, tags, category } = Astro.props;
+
+const formatted = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Layout title={`${title} — Bryan Loh`} description={description}>
+  <article class="prose-terminal">
+    <header class="mb-10">
+      <div class="flex items-center gap-3 text-sm opacity-50 mb-3">
+        <time datetime={date.toISOString()}>{formatted}</time>
+        <span>/</span>
+        <span>{category}</span>
+      </div>
+      <h1 class="text-xl md:text-2xl lg:text-3xl font-bold text-amber-700 dark:text-amber-400 mb-3">{title}</h1>
+      <p class="opacity-70">{description}</p>
+      {tags.length > 0 && (
+        <div class="flex gap-2 mt-4 flex-wrap">
+          {tags.map(tag => (
+            <span class="text-xs border border-current/20 px-2 py-0.5 opacity-60">#{tag}</span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <div class="post-content">
+      <slot />
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .post-content :global(h2) {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    color: var(--accent);
+  }
+
+  .post-content :global(h3) {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .post-content :global(p) {
+    margin-bottom: 1.25rem;
+    line-height: 1.75;
+    opacity: 0.85;
+  }
+
+  .post-content :global(code) {
+    background-color: color-mix(in srgb, var(--accent) 12%, transparent);
+    color: var(--accent);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+    font-size: 0.9em;
+  }
+
+  .post-content :global(pre) {
+    background-color: #111;
+    border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+    padding: 1rem;
+    overflow-x: auto;
+    margin-bottom: 1.25rem;
+  }
+
+  .post-content :global(pre code) {
+    background: none;
+    color: #e8e8e8;
+    padding: 0;
+  }
+
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+    opacity: 0.85;
+  }
+
+  .post-content :global(li) {
+    margin-bottom: 0.4rem;
+    line-height: 1.75;
+  }
+
+  .post-content :global(blockquote) {
+    border-left: 2px solid var(--accent);
+    padding-left: 1rem;
+    opacity: 0.7;
+    margin-bottom: 1.25rem;
+  }
+
+  .post-content :global(a) {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+</style>
