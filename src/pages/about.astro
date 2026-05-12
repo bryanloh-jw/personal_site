@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+---
+<BaseLayout title="About — Bryan Loh" description="About Bryan Loh, software engineer.">
+
+  <h1 class="text-3xl font-semibold text-slate-900 dark:text-slate-100 mb-8">About</h1>
+
+  <div class="space-y-5 text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
+    <p>
+      I'm Bryan, a software engineer based in Singapore. I spend most of my time building
+      backend systems and thinking about how to make software that's reliable, maintainable,
+      and actually useful to the people who depend on it.
+    </p>
+    <p>
+      I got into engineering not because I loved computers from the start, but because I liked
+      solving problems — and code turned out to be a remarkably flexible tool for that. Over
+      the years I've worked across different stacks and domains, and I've learned that the
+      hard parts of software are rarely the technical ones.
+    </p>
+    <p>
+      Outside of work I read broadly, think slowly, and write occasionally. This site is where
+      I put some of that down.
+    </p>
+  </div>
+
+  <!-- Now section -->
+  <section class="mt-14">
+    <h2 class="text-xs font-medium tracking-widest uppercase text-slate-400 dark:text-slate-500 mb-5">
+      Now
+    </h2>
+    <ul class="space-y-3 text-slate-600 dark:text-slate-300">
+      <li class="flex gap-2">
+        <span class="text-indigo-600 dark:text-indigo-400 shrink-0">→</span>
+        <span><strong class="font-medium text-slate-800 dark:text-slate-200">Building:</strong> this personal site</span>
+      </li>
+      <li class="flex gap-2">
+        <span class="text-indigo-600 dark:text-indigo-400 shrink-0">→</span>
+        <span><strong class="font-medium text-slate-800 dark:text-slate-200">Reading:</strong> something worth your time</span>
+      </li>
+      <li class="flex gap-2">
+        <span class="text-indigo-600 dark:text-indigo-400 shrink-0">→</span>
+        <span><strong class="font-medium text-slate-800 dark:text-slate-200">Learning:</strong> something new</span>
+      </li>
+    </ul>
+  </section>
+
+  <div class="mt-14 pt-8 border-t border-slate-100 dark:border-slate-800">
+    <SocialLinks />
+  </div>
+
+</BaseLayout>

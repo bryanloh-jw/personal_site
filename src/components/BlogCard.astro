@@ -1,0 +1,48 @@
+---
+interface Props {
+  title: string;
+  date: Date;
+  excerpt: string;
+  tags: string[];
+  slug: string;
+  readingTime: number;
+}
+
+const { title, date, excerpt, tags, slug, readingTime } = Astro.props;
+
+const formattedDate = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+---
+<article class="group py-6 border-b border-slate-100 dark:border-slate-800 last:border-0">
+  <div class="flex items-baseline justify-between gap-4">
+    <a
+      href={`/blog/${slug}`}
+      class="text-lg font-semibold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors"
+    >
+      {title}
+    </a>
+    <time
+      datetime={date.toISOString()}
+      class="text-sm text-slate-400 dark:text-slate-500 whitespace-nowrap shrink-0"
+    >
+      {formattedDate}
+    </time>
+  </div>
+  <p class="mt-1.5 text-slate-500 dark:text-slate-400 text-sm leading-relaxed line-clamp-2">
+    {excerpt}
+  </p>
+  <div class="mt-2.5 flex items-center gap-3 flex-wrap">
+    {tags.map((tag) => (
+      <a
+        href={`/blog/tag/${tag}`}
+        class="text-xs text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors"
+      >
+        #{tag}
+      </a>
+    ))}
+    <span class="text-xs text-slate-400 dark:text-slate-500">{readingTime} min read</span>
+  </div>
+</article>
