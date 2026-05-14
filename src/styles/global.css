@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --color-accent: oklch(55% 0.2 260);
+  --color-accent-muted: oklch(70% 0.15 260);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+  }
+
+  body {
+    @apply bg-white text-slate-800 dark:bg-slate-950 dark:text-slate-100;
+    @apply transition-colors duration-200;
+  }
+
+  a {
+    @apply transition-colors duration-150;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-semibold tracking-tight;
+  }
+
+  /* Prose styles for blog post bodies */
+  .prose {
+    @apply text-lg leading-relaxed text-slate-700 dark:text-slate-300;
+  }
+
+  .prose h2 {
+    @apply text-2xl font-semibold text-slate-900 dark:text-slate-100 mt-10 mb-4;
+  }
+
+  .prose h3 {
+    @apply text-xl font-semibold text-slate-900 dark:text-slate-100 mt-8 mb-3;
+  }
+
+  .prose p {
+    @apply mb-6;
+  }
+
+  .prose a {
+    @apply text-indigo-600 dark:text-indigo-400 underline underline-offset-2 hover:text-indigo-800 dark:hover:text-indigo-300;
+  }
+
+  .prose ul {
+    @apply list-disc pl-6 mb-6 space-y-1;
+  }
+
+  .prose ol {
+    @apply list-decimal pl-6 mb-6 space-y-1;
+  }
+
+  .prose blockquote {
+    @apply border-l-4 border-indigo-300 dark:border-indigo-700 pl-4 italic text-slate-600 dark:text-slate-400 my-6;
+  }
+
+  .prose code:not(pre code) {
+    @apply bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 px-1.5 py-0.5 rounded text-sm font-mono;
+  }
+
+  .prose pre {
+    @apply bg-slate-100 dark:bg-slate-800 rounded-lg p-4 overflow-x-auto mb-6 text-sm font-mono leading-relaxed;
+  }
+
+  .prose hr {
+    @apply border-slate-200 dark:border-slate-700 my-10;
+  }
+
+  .prose strong {
+    @apply font-semibold text-slate-900 dark:text-slate-100;
+  }
+}
