@@ -1,14 +1,17 @@
 pre-commit:
-    commands:
-        eslint:
-            glob: '*.{js,ts,astro,jsx,tsx}'
-            run: npx eslint --fix {staged_files}
+  commands:
+    eslint:
+      glob: '*.{js,ts,astro,jsx,tsx}'
+      run: npx eslint --fix {staged_files}
+      stage_fixed: true
 
-        prettier:
-            glob: '*.{js,ts,astro,jsx,tsx,css,json}'
-            run: npx prettier --write {staged_files}
+    prettier:
+      glob: '*.{js,ts,astro,jsx,tsx,css,json}'
+      run: npx prettier --write {staged_files}
+      stage_fixed: true
 
-        # --- Markdown ---
-        markdownlint:
-            glob: '*.md'
-            run: npx markdownlint-cli2 {staged_files}
+    # --- Markdown ---
+    markdownlint:
+      glob: '*.md'
+      run: npx markdownlint-cli2 --fix {staged_files}
+      stage_fixed: true
