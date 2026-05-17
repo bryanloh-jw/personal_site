@@ -1,9 +1,9 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
   --color-accent: oklch(55% 0.2 260);
   --color-accent-muted: oklch(70% 0.15 260);
 }
@@ -22,7 +22,10 @@
     @apply transition-colors duration-150;
   }
 
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     @apply font-semibold tracking-tight;
   }
 

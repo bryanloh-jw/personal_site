@@ -1,8 +1,8 @@
 ---
-title: "On Writing Readable Code"
+title: 'On Writing Readable Code'
 date: 2026-04-20
 excerpt: "Readable code isn't about comments or naming conventions. It's about managing what the reader has to hold in their head at once."
-tags: ["technical", "craft"]
+tags: ['technical', 'craft']
 draft: false
 ---
 

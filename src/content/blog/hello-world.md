@@ -1,8 +1,8 @@
 ---
-title: "Hello, World"
+title: 'Hello, World'
 date: 2026-05-12
 excerpt: "First post. A few words on why I'm starting to write publicly and what I hope to do with this space."
-tags: ["personal"]
+tags: ['personal']
 draft: false
 ---
 
