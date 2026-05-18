@@ -1,11 +1,10 @@
 ---
 title: 'My honest opinion on Google Cybersecurity Professional Certificate'
 date: 2024-06-22
-excerpt: "My expereince taking Google Cybersecurity Professional Certificate"
+excerpt: 'My expereince taking Google Cybersecurity Professional Certificate'
 tags: ['cybersecurity', 'learning']
 draft: false
 ---
-
 
 ## Introduction
 
@@ -47,7 +46,7 @@ Because the quizzes were not proctored, it is possible to refer to the notes whi
 
 The marketing for this professional certificate is very aggressive. This course is highly promoted by content creators on YouTube, but most of them are sponsored content which makes it very biased.
 
-The one thing I do not agree with the course promotion is that one can ***Qualify for in-demand job titles: cybersecurity analyst, security analyst, security operations center (SOC) analyst***. As mentioned previously, I do not think that the courses have sufficient rigor to certify that the professional certificate holders has achieved the learning outcomes as mentioned in the professional certificate. Therefore I have some doubt about the relevance of the course in this aspect.
+The one thing I do not agree with the course promotion is that one can **_Qualify for in-demand job titles: cybersecurity analyst, security analyst, security operations center (SOC) analyst_**. As mentioned previously, I do not think that the courses have sufficient rigor to certify that the professional certificate holders has achieved the learning outcomes as mentioned in the professional certificate. Therefore I have some doubt about the relevance of the course in this aspect.
 
 Another thing to note, is that through a brief search of cybersecurity analyst roles, I was not able to find a listing that mentions the Google Cybersecurity Professional Certificate. In comparison, there are some listings referencing the [CompTIA Security+](https://www.comptia.org/certifications/security) certification.
 

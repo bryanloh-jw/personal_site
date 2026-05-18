@@ -1,4 +1,5 @@
 pre-commit:
+  piped: true
   commands:
     eslint:
       glob: '*.{js,ts,astro,jsx,tsx}'

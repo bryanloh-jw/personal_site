@@ -1,12 +1,12 @@
 ---
 title: 'Preparing for the ISC2 Certified in Cybersecurity exam'
 date: 2024-06-17
-excerpt: "My expereicne with ISC2 - An entry level certificate"
+excerpt: 'My expereicne with ISC2 - An entry level certificate'
 tags: ['cybersecurity', 'learning']
 draft: false
 ---
 
-As someone looking to break into the cybersecurity field, I came across a great opportunity to take an entry level certification for free (almost). In particular, ISC2 is giving (at the point of writing) free training material and an exam attempt at their [Certified-in-Cybersecurity (CC)]([https://www.isc2.org/certifications/cc](https://www.isc2.org/certifications/cc)) certificate. Having successfully passed the exam, I want to share my experience on how I prepared for the exam.
+As someone looking to break into the cybersecurity field, I came across a great opportunity to take an entry level certification for free (almost). In particular, ISC2 is giving (at the point of writing) free training material and an exam attempt at their [Certified-in-Cybersecurity (CC)](<[https://www.isc2.org/certifications/cc](https://www.isc2.org/certifications/cc)>) certificate. Having successfully passed the exam, I want to share my experience on how I prepared for the exam.
 
 ## What is the CC certificate?
 
@@ -18,7 +18,7 @@ This certificate is an entry level certification that demonstrates the candidate
 4. Network security
 5. Security operations
 
-The topics covered are a beginner friendly version of what is covered in ISC2 [Certified Information System Security Professional (CISSP)]([https://www.isc2.org/certifications/cissp](https://www.isc2.org/certifications/cissp)) which is a highly recognized certification for more experienced cybersecurity professionals.
+The topics covered are a beginner friendly version of what is covered in ISC2 [Certified Information System Security Professional (CISSP)](<[https://www.isc2.org/certifications/cissp](https://www.isc2.org/certifications/cissp)>) which is a highly recognized certification for more experienced cybersecurity professionals.
 
 It gives a good exposure to knowledge required in the cybersecurity domain at the entry level.
 
@@ -38,7 +38,7 @@ Another resource that I used in preparation are these practice exams:
 
 [Practice Exam 4 for ISC2 Certified in Cybersecurity (CC) Online Class](https://www.linkedin.com/learning/practice-exam-4-for-isc2-certified-in-cybersecurity-cc)
 
-These practice papers have pretty good questions to test your overall understanding of the concepts, and gives feedback on questions after submitting the paper. I found that the questions were slightly simpler than the actual exam, so these might not be  sufficient.
+These practice papers have pretty good questions to test your overall understanding of the concepts, and gives feedback on questions after submitting the paper. I found that the questions were slightly simpler than the actual exam, so these might not be sufficient.
 
 By attempting the timed practice, I got a good feel of how to pace myself through the actual exam. Something to note is that the actual exam does not allow turnback (in my experience) and therefore you should keep that in mind while practicing.
 

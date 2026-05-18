@@ -1,7 +1,7 @@
 ---
 title: 'My honest opinion on Google Cybersecurity Professional Certificate'
 date: 2024-06-22
-excerpt: "My expereince taking Google Cybersecurity Professional Certificate"
+excerpt: 'My expereince taking Google Cybersecurity Professional Certificate'
 tags: ['cybersecurity', 'learning']
 draft: false
 ---
@@ -71,16 +71,16 @@ Do take note that I added an additional step of converting addresses to their la
 
 ```ts
 async function script() {
- const excelInput = await readExcel();
- const rawAddresses = excelInput.entries;
- const origin = excelInput.origin;
- const originLatLng = await geoCodeAddress(origin);
- const geoCodedAddresses = await geoCodeAddresses(rawAddresses);
- const addressesWithDistance = await originDestinationDistanceAddresses(
-  originLatLng,
-  geoCodedAddresses
- );
- await generateWriteExcelData(origin, addressesWithDistance);
+  const excelInput = await readExcel()
+  const rawAddresses = excelInput.entries
+  const origin = excelInput.origin
+  const originLatLng = await geoCodeAddress(origin)
+  const geoCodedAddresses = await geoCodeAddresses(rawAddresses)
+  const addressesWithDistance = await originDestinationDistanceAddresses(
+    originLatLng,
+    geoCodedAddresses,
+  )
+  await generateWriteExcelData(origin, addressesWithDistance)
 }
 ```
 
@@ -90,39 +90,39 @@ The main function handles the flow of the script, from reading the excel file fo
 
 ```ts
 type ExcelInput = {
- origin: string;
- entries: {
-  name: string;
-  address: string;
- }[];
-};
+  origin: string
+  entries: {
+    name: string
+    address: string
+  }[]
+}
 
 async function readExcel(): Promise<ExcelInput> {
- const rows = await readXlsxFile('./input.xlsx');
- const origin = rows[0][4];
- const entries: { name: string; address: string }[] = [];
- for (let i = 1; i < rows.length; i++) {
-  const entry = {
-   name: rows[i][0],
-   address: scrapRawUrl(rows[i][1]),
-  };
-  entries.push(entry);
- }
- const result: ExcelInput = {
-  origin,
-  entries,
- };
- return result;
+  const rows = await readXlsxFile('./input.xlsx')
+  const origin = rows[0][4]
+  const entries: { name: string; address: string }[] = []
+  for (let i = 1; i < rows.length; i++) {
+    const entry = {
+      name: rows[i][0],
+      address: scrapRawUrl(rows[i][1]),
+    }
+    entries.push(entry)
+  }
+  const result: ExcelInput = {
+    origin,
+    entries,
+  }
+  return result
 }
 
 function scrapRawUrl(rawUrl: string) {
- const removedQuotes = rawUrl.replace('"', '');
- const rawDestAddr = removedQuotes.split('daddr=')[1];
- let destAddr = rawDestAddr;
- while (indexOf(destAddr, '+') >= 0) {
-  destAddr = destAddr.replace('+', ' ');
- }
- return destAddr;
+  const removedQuotes = rawUrl.replace('"', '')
+  const rawDestAddr = removedQuotes.split('daddr=')[1]
+  let destAddr = rawDestAddr
+  while (indexOf(destAddr, '+') >= 0) {
+    destAddr = destAddr.replace('+', ' ')
+  }
+  return destAddr
 }
 ```
 
@@ -138,32 +138,32 @@ The addresses are in the form of Google map links, so the `scrapRawUrl` function
 
 ```ts
 async function geoCodeAddress(address: string): Promise<LatLngLiteral> {
- const args: GeocodeRequest = {
-  params: {
-   address,
-   key: apiKey,
-  },
- };
- const res: GeocodeResponse = await client.geocode(args);
+  const args: GeocodeRequest = {
+    params: {
+      address,
+      key: apiKey,
+    },
+  }
+  const res: GeocodeResponse = await client.geocode(args)
 
- return res.data.results[0].geometry.location;
+  return res.data.results[0].geometry.location
 }
 
 async function geoCodeAddresses(
- rawAddresses: { name: string; address: string }[]
+  rawAddresses: { name: string; address: string }[],
 ): Promise<{ name: string; address: string; latLng: LatLngLiteral }[]> {
- const geoCodedAddresses: {
-  name: string;
-  address: string;
-  latLng: LatLngLiteral;
- }[] = [];
- for (let i = 0; i < rawAddresses.length; i++) {
-  const rawAddress = rawAddresses[i];
-  const latLng = await geoCodeAddress(rawAddress.address);
-  const geoCodedAddress = { ...rawAddress, latLng };
-  geoCodedAddresses.push(geoCodedAddress);
- }
- return geoCodedAddresses;
+  const geoCodedAddresses: {
+    name: string
+    address: string
+    latLng: LatLngLiteral
+  }[] = []
+  for (let i = 0; i < rawAddresses.length; i++) {
+    const rawAddress = rawAddresses[i]
+    const latLng = await geoCodeAddress(rawAddress.address)
+    const geoCodedAddress = { ...rawAddress, latLng }
+    geoCodedAddresses.push(geoCodedAddress)
+  }
+  return geoCodedAddresses
 }
 ```
 
@@ -175,61 +175,56 @@ async function geoCodeAddresses(
 
 ```ts
 async function originDestinationDistanceAddresses(
- origin: LatLngLiteral,
- geoCodedAddresses: {
-  name: string;
-  address: string;
-  latLng: LatLngLiteral;
- }[]
+  origin: LatLngLiteral,
+  geoCodedAddresses: {
+    name: string
+    address: string
+    latLng: LatLngLiteral
+  }[],
 ): Promise<
- {
-  name: string;
-  address: string;
-  latLng: LatLngLiteral;
-  distanceFromOrigin: string;
- }[]
+  {
+    name: string
+    address: string
+    latLng: LatLngLiteral
+    distanceFromOrigin: string
+  }[]
 > {
- const originDestinationDistanceAddresses: {
-  name: string;
-  address: string;
-  latLng: LatLngLiteral;
-  distanceFromOrigin: string;
- }[] = [];
- for (let i = 0; i < geoCodedAddresses.length; i++) {
-  const distance = await originDestinationDistance(
-   origin,
-   geoCodedAddresses[i].latLng
-  );
-  const result = {
-   ...geoCodedAddresses[i],
-   distanceFromOrigin: distance,
-  };
-  originDestinationDistanceAddresses.push(result);
- }
+  const originDestinationDistanceAddresses: {
+    name: string
+    address: string
+    latLng: LatLngLiteral
+    distanceFromOrigin: string
+  }[] = []
+  for (let i = 0; i < geoCodedAddresses.length; i++) {
+    const distance = await originDestinationDistance(origin, geoCodedAddresses[i].latLng)
+    const result = {
+      ...geoCodedAddresses[i],
+      distanceFromOrigin: distance,
+    }
+    originDestinationDistanceAddresses.push(result)
+  }
 
- return originDestinationDistanceAddresses;
+  return originDestinationDistanceAddresses
 }
 
 async function originDestinationDistance(
- origin: LatLngLiteral,
- destination: LatLngLiteral
+  origin: LatLngLiteral,
+  destination: LatLngLiteral,
 ): Promise<string> {
- const args: DistanceMatrixRequest = {
-  params: {
-   origins: [origin],
-   destinations: [destination],
-   units: UnitSystem.metric,
-   key: apiKey,
-  },
- };
+  const args: DistanceMatrixRequest = {
+    params: {
+      origins: [origin],
+      destinations: [destination],
+      units: UnitSystem.metric,
+      key: apiKey,
+    },
+  }
 
- const res: DistanceMatrixResponse = await client.distancematrix(args);
+  const res: DistanceMatrixResponse = await client.distancematrix(args)
 
- const distance =
-  res?.data?.rows[0]?.elements[0]?.distance?.text.replace(' km', '') ||
-  '99999999';
+  const distance = res?.data?.rows[0]?.elements[0]?.distance?.text.replace(' km', '') || '99999999'
 
- return distance;
+  return distance
 }
 ```
 
@@ -241,68 +236,68 @@ async function originDestinationDistance(
 
 ```ts
 async function generateWriteExcelData(
- origin: string,
- addressesWithDistance: {
-  name: string;
-  address: string;
-  latLng: LatLngLiteral;
-  distanceFromOrigin: string;
- }[]
+  origin: string,
+  addressesWithDistance: {
+    name: string
+    address: string
+    latLng: LatLngLiteral
+    distanceFromOrigin: string
+  }[],
 ): Promise<void> {
- const data: any[] = [];
- const HEADER_ROW = [
-  {
-   value: 'No.',
-   fontWeight: 'bold',
-  },
-  {
-   value: 'Location',
-   fontWeight: 'bold',
-  },
-  {
-   value: 'Address',
-   fontWeight: 'bold',
-  },
-  {
-   value: 'Distance From Origin (km)',
-   fontWeight: 'bold',
-  },
-  {
-   value: 'Origin:',
-   fontWeight: 'bold',
-  },
-  {
-   value: origin,
-   fontWeight: 'bold',
-  },
- ];
- data.push(HEADER_ROW);
+  const data: any[] = []
+  const HEADER_ROW = [
+    {
+      value: 'No.',
+      fontWeight: 'bold',
+    },
+    {
+      value: 'Location',
+      fontWeight: 'bold',
+    },
+    {
+      value: 'Address',
+      fontWeight: 'bold',
+    },
+    {
+      value: 'Distance From Origin (km)',
+      fontWeight: 'bold',
+    },
+    {
+      value: 'Origin:',
+      fontWeight: 'bold',
+    },
+    {
+      value: origin,
+      fontWeight: 'bold',
+    },
+  ]
+  data.push(HEADER_ROW)
 
- for (let i = 0; i < addressesWithDistance.length; i++) {
-  const dataEntry = [
-   {
-    type: String,
-    value: `${i + 1}`,
-   },
-   {
-    type: String,
-    value: addressesWithDistance[i].name,
-   },
-   {
-    type: String,
-    value: addressesWithDistance[i].address,
-   },
-   {
-    type: String,
-    value: addressesWithDistance[i].distanceFromOrigin,
-   },
-  ];
-  data.push(dataEntry);
- }
+  for (let i = 0; i < addressesWithDistance.length; i++) {
+    const dataEntry = [
+      {
+        type: String,
+        value: `${i + 1}`,
+      },
+      {
+        type: String,
+        value: addressesWithDistance[i].name,
+      },
+      {
+        type: String,
+        value: addressesWithDistance[i].address,
+      },
+      {
+        type: String,
+        value: addressesWithDistance[i].distanceFromOrigin,
+      },
+    ]
+    data.push(dataEntry)
+  }
 
- await writeXlsxFile(data, {
-  filePath: './result.xlsx',
- });
+  await writeXlsxFile(data, {
+    filePath: './result.xlsx',
+  })
 }
 ```
 
