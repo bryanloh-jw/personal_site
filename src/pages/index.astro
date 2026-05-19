@@ -1,63 +1,70 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import SocialLinks from '../components/SocialLinks.astro';
-import BlogCard from '../components/BlogCard.astro';
-import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro'
+import SocialLinks from '../components/SocialLinks.astro'
+import BlogCard from '../components/BlogCard.astro'
+import { getCollection } from 'astro:content'
 
-const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const allPosts = await getCollection('blog', ({ data }) => !data.draft)
 const recentPosts = allPosts
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 3);
+  .slice(0, 3)
 
 function readingTime(body: string): number {
-  return Math.max(1, Math.ceil(body.split(/\s+/).length / 200));
+  return Math.max(1, Math.ceil(body.split(/\s+/).length / 200))
 }
 ---
-<BaseLayout title="Bryan Loh" description="Software engineer. I write about building things, thinking clearly, and lessons learned along the way.">
 
+<BaseLayout
+  title="Bryan Loh"
+  description="Software engineer. I write about building things, thinking clearly, and lessons learned along the way."
+>
   <!-- Hero -->
   <section class="pt-4 pb-14">
     <h1 class="text-4xl font-semibold text-slate-900 dark:text-slate-100 leading-tight">
       Hi, I'm Bryan Loh.
     </h1>
     <p class="mt-4 text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-lg">
-      Software engineer. I write about building things, thinking clearly, and lessons learned along the way.
+      Security engineer. Former developer. I know how things are built, so I know how they break.
     </p>
     <SocialLinks class="mt-6" />
   </section>
 
   <!-- Recent Writing -->
-  {recentPosts.length > 0 && (
-    <section class="pb-14">
-      <div class="flex items-baseline justify-between mb-2">
-        <h2 class="text-xs font-medium tracking-widest uppercase text-slate-400 dark:text-slate-500">
-          Recent Writing
-        </h2>
-        <a
-          href="/blog"
-          class="text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors"
-        >
-          All posts →
-        </a>
-      </div>
-      <div>
-        {recentPosts.map((post) => (
-          <BlogCard
-            title={post.data.title}
-            date={post.data.date}
-            excerpt={post.data.excerpt}
-            tags={post.data.tags}
-            slug={post.id}
-            readingTime={readingTime(post.body ?? '')}
-          />
-        ))}
-      </div>
-    </section>
-  )}
+  {
+    recentPosts.length > 0 && (
+      <section class="pb-14">
+        <div class="flex items-baseline justify-between mb-2">
+          <h2 class="text-xs font-medium tracking-widest uppercase text-slate-400 dark:text-slate-500">
+            Recent Writing
+          </h2>
+          <a
+            href="/blog"
+            class="text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors"
+          >
+            All posts →
+          </a>
+        </div>
+        <div>
+          {recentPosts.map((post) => (
+            <BlogCard
+              title={post.data.title}
+              date={post.data.date}
+              excerpt={post.data.excerpt}
+              tags={post.data.tags}
+              slug={post.id}
+              readingTime={readingTime(post.body ?? '')}
+            />
+          ))}
+        </div>
+      </section>
+    )
+  }
 
   <!-- Contact -->
   <section class="pb-4">
-    <h2 class="text-xs font-medium tracking-widest uppercase text-slate-400 dark:text-slate-500 mb-4">
+    <h2
+      class="text-xs font-medium tracking-widest uppercase text-slate-400 dark:text-slate-500 mb-4"
+    >
       Get in Touch
     </h2>
     <p class="text-slate-600 dark:text-slate-300">
@@ -70,5 +77,4 @@ function readingTime(body: string): number {
       </a>
     </p>
   </section>
-
 </BaseLayout>
