@@ -7,7 +7,7 @@ pre-commit:
       stage_fixed: true
 
     prettier:
-      glob: '*.{js,ts,astro,jsx,tsx,css,json}'
+      glob: '*.{js,ts,astro,jsx,tsx,css,json,md,yml,yaml,html}'
       run: npx prettier --write {staged_files}
       stage_fixed: true
 
