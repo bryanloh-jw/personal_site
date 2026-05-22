@@ -16,3 +16,8 @@ pre-commit:
       glob: '*.md'
       run: npx markdownlint-cli2 --fix {staged_files}
       stage_fixed: true
+
+    # --- Dockerfile ---
+    hadolint:
+      glob: 'Dockerfile*'
+      run: hadolint {staged_files}

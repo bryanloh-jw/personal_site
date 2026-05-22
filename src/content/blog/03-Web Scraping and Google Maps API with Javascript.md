@@ -1,8 +1,8 @@
 ---
-title: 'My honest opinion on Google Cybersecurity Professional Certificate'
-date: 2024-06-22
-excerpt: 'My expereince taking Google Cybersecurity Professional Certificate'
-tags: ['cybersecurity', 'learning']
+title: 'Web Scraping and Google Maps API with Javascript'
+date: 2024-07-13
+excerpt: "Automated distance searching and web scraping to make my wife's life easier"
+tags: ['automation', 'web']
 draft: false
 ---
 

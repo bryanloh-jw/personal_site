@@ -1,11 +1,11 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import BlogCard from '../../../components/BlogCard.astro';
-import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro'
+import BlogCard from '../../../components/BlogCard.astro'
+import { getCollection } from 'astro:content'
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection('blog', ({ data }) => !data.draft);
-  const tags = [...new Set(allPosts.flatMap((p) => p.data.tags))];
+  const allPosts = await getCollection('blog', ({ data }) => !data.draft)
+  const tags = [...new Set(allPosts.flatMap((p) => p.data.tags))]
   return tags.map((tag) => ({
     params: { tag },
     props: {
@@ -14,24 +14,22 @@ export async function getStaticPaths() {
         .filter((p) => p.data.tags.includes(tag))
         .sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
     },
-  }));
+  }))
 }
 
-const { tag, posts } = Astro.props;
+const { tag, posts } = Astro.props
 
-const allPosts = await getCollection('blog', ({ data }) => !data.draft);
-const allTags = [...new Set(allPosts.flatMap((p) => p.data.tags))].sort();
+const allPosts = await getCollection('blog', ({ data }) => !data.draft)
+const allTags = [...new Set(allPosts.flatMap((p) => p.data.tags))].sort()
 
 function readingTime(body: string): number {
-  return Math.max(1, Math.ceil(body.split(/\s+/).length / 200));
+  return Math.max(1, Math.ceil(body.split(/\s+/).length / 200))
 }
 ---
-<BaseLayout title={`#${tag} — Bryan Loh`} description={`Posts tagged with #${tag}`}>
 
+<BaseLayout title={`#${tag} — Bryan Loh`} description={`Posts tagged with #${tag}`}>
   <div class="flex items-baseline justify-between mb-8">
-    <h1 class="text-3xl font-semibold text-slate-900 dark:text-slate-100">
-      Writing
-    </h1>
+    <h1 class="text-3xl font-semibold text-slate-900 dark:text-slate-100">Writing</h1>
   </div>
 
   <div class="flex flex-wrap gap-2 mb-8">
@@ -41,31 +39,34 @@ function readingTime(body: string): number {
     >
       All
     </a>
-    {allTags.map((t) => (
-      <a
-        href={`/blog/tag/${t}`}
-        class={`text-sm px-3 py-1 rounded-full transition-colors ${
-          t === tag
-            ? 'bg-indigo-600 text-white dark:bg-indigo-500'
-            : 'border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-indigo-400 hover:text-indigo-600 dark:hover:text-indigo-400'
-        }`}
-      >
-        {t}
-      </a>
-    ))}
+    {
+      allTags.map((t) => (
+        <a
+          href={`/blog/tag/${t}`}
+          class={`text-sm px-3 py-1 rounded-full transition-colors ${
+            t === tag
+              ? 'bg-indigo-600 text-white dark:bg-indigo-500'
+              : 'border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-indigo-400 hover:text-indigo-600 dark:hover:text-indigo-400'
+          }`}
+        >
+          {t}
+        </a>
+      ))
+    }
   </div>
 
   <div>
-    {posts.map((post) => (
-      <BlogCard
-        title={post.data.title}
-        date={post.data.date}
-        excerpt={post.data.excerpt}
-        tags={post.data.tags}
-        slug={post.id}
-        readingTime={readingTime(post.body ?? '')}
-      />
-    ))}
+    {
+      posts.map((post) => (
+        <BlogCard
+          title={post.data.title}
+          date={post.data.date}
+          excerpt={post.data.excerpt}
+          tags={post.data.tags}
+          slug={post.id}
+          readingTime={readingTime(post.body ?? '')}
+        />
+      ))
+    }
   </div>
-
 </BaseLayout>

@@ -1,15 +1,16 @@
 ---
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import '../styles/global.css';
+import Nav from '../components/Nav.astro'
+import Footer from '../components/Footer.astro'
+import '../styles/global.css'
 
 interface Props {
-  title: string;
-  description?: string;
+  title: string
+  description?: string
 }
 
-const { title, description = 'Bryan Loh — Software Engineer' } = Astro.props;
+const { title, description = 'Bryan Loh — Security Engineer' } = Astro.props
 ---
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -22,17 +23,20 @@ const { title, description = 'Bryan Loh — Software Engineer' } = Astro.props;
     <meta name="description" content={description} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Dark mode: runs before paint to prevent flash -->
     <script is:inline>
-      (function () {
-        const stored = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      ;(function () {
+        const stored = localStorage.getItem('theme')
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
         if (stored === 'dark' || (!stored && prefersDark)) {
-          document.documentElement.classList.add('dark');
+          document.documentElement.classList.add('dark')
         }
-      })();
+      })()
     </script>
   </head>
   <body>
