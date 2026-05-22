@@ -1,43 +1,72 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro'
 ---
-<BaseLayout title="Resume — Bryan Loh" description="Bryan Loh's resume.">
 
+<BaseLayout title="Resume — Bryan Loh" description="Bryan Loh's resume.">
   <div class="flex items-center justify-between mb-8">
     <h1 class="text-3xl font-semibold text-slate-900 dark:text-slate-100">Resume</h1>
-    <a
-      href="/resume.pdf"
-      download
-      class="flex items-center gap-2 text-sm px-4 py-2 rounded-md border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-indigo-400 dark:hover:border-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-        <polyline points="7 10 12 15 17 10"/>
-        <line x1="12" x2="12" y1="15" y2="3"/>
-      </svg>
-      Download PDF
-    </a>
+    <div class="flex items-center gap-2">
+      <a
+        href="/resume.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-2 text-sm px-4 py-2 rounded-md border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-indigo-400 dark:hover:border-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <line x1="10" x2="21" y1="14" y2="3"></line>
+        </svg>
+        Open in new tab
+      </a>
+      <a
+        href="/resume.pdf"
+        download
+        class="flex items-center gap-2 text-sm px-4 py-2 rounded-md border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-indigo-400 dark:hover:border-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" x2="12" y1="15" y2="3"></line>
+        </svg>
+        Download PDF
+      </a>
+    </div>
   </div>
 
   <!-- Mobile notice -->
-  <p class="sm:hidden mb-4 text-sm text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-800 rounded-md px-4 py-3">
+  <p
+    class="sm:hidden mb-4 text-sm text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-800 rounded-md px-4 py-3"
+  >
     For the best experience, download the PDF directly using the button above.
   </p>
 
-  <div class="hidden sm:block rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700">
-    <iframe
-      src="/resume.pdf"
-      width="100%"
-      class="min-h-[80vh] block"
-      title="Bryan Loh's Resume"
-    >
-      <p class="p-4 text-slate-500">
-        Your browser can't display PDFs.{' '}
-        <a href="/resume.pdf" download class="text-indigo-600 dark:text-indigo-400 underline">
-          Download it here.
-        </a>
-      </p>
+  <div
+    class="hidden sm:block rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700"
+  >
+    <iframe src="/resume.pdf" width="100%" class="min-h-[80vh] block" title="Bryan Loh's Resume">
+      <p class="p-4 text-slate-500"> Your browser can't display PDFs.{' '} <a href="/resume.pdf"
+      download class="text-indigo-600 dark:text-indigo-400 underline"> Download it here. </a> </p>
     </iframe>
   </div>
-
 </BaseLayout>
