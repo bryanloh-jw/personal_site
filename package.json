@@ -20,6 +20,7 @@
     "@typescript-eslint/parser": "^8.59.3",
     "eslint": "^10.3.0",
     "eslint-plugin-astro": "^1.7.0",
+    "hadolint": "^0.4.2",
     "lefthook": "^2.1.6",
     "markdownlint-cli2": "^0.22.1",
     "prettier": "^3.8.3",
