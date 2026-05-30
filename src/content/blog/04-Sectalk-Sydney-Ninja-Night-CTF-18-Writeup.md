@@ -1,8 +1,10 @@
-# Sectalk Sydney Ninja Night CTF ## 18
-
-Date - 12/05/26
-
-Writeup written by Bryan
+---
+title: 'Sectalk Sydney Ninja Night CTF #18 Writeup'
+date: 2026-05-12
+excerpt: 'Chaining XSS, cookie exfiltration, and SSTI to capture three flags at a CTF night'
+tags: ['security', 'ctf']
+draft: false
+---
 
 ## Flag 1
 
