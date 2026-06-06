@@ -10,11 +10,11 @@ draft: false
 
 After logging into the application, users are able to write their own notes:
 
-![note input](/public/003-ninja-ctf.png)
+![note input](/public/04/003-ninja-ctf.png)
 
 After uploading the note, users are able to view its content:
 
-![note content](/public/004-ninja-ctf.png)
+![note content](/public/04/004-ninja-ctf.png)
 
 The report to admin
 
@@ -24,21 +24,21 @@ The way the note is rendered is vulnerable to XSS injection, the source code of 
 
 `note.html` template:
 
-![note.html](/public/005-ninja-ctf.png)
+![note.html](/public/04/005-ninja-ctf.png)
 
 flask `app.py` route to serve `note.html`
 
-![app.py](/public/006-ninja-ctf.png)
+![app.py](/public/04/006-ninja-ctf.png)
 
 Because user's input is being rendered as html, arbitrary html tags can be injected to run javascript as shown below
 
-![javascript alert](/public/007-ninja-ctf.png)
+![javascript alert](/public/04/007-ninja-ctf.png)
 
-![dom](/public/008-ninja-ctf.png)
+![dom](/public/04/008-ninja-ctf.png)
 
 The JWT token used for user authentication does not have `http only` option selected, which allows it to be accessed by javascript, making exfiltration possible
 
-![application cookies](/public/009-ninja-ctf.png)
+![application cookies](/public/04/009-ninja-ctf.png)
 
 ### Attack path - Flag 1
 
@@ -58,7 +58,7 @@ Payload:
 
 This is the source code for flag 2 endpoint:
 
-![flag 2 code](/public/010-ninja-ctf.png)
+![flag 2 code](/public/04/010-ninja-ctf.png)
 
 We need the admin to retrieve the flag, and it can only be accessed locally, so even if we forged a valid JWT cookie, we may not be able to access the endpoint.
 
@@ -70,7 +70,7 @@ What we can do is do chain the HTTP requests that the admin makes:
 
 And the readme exposes the port to access the application locally:
 
-![readme docker command](/public/011-ninja-ctf.png)
+![readme docker command](/public/04/011-ninja-ctf.png)
 
 Payload:
 
@@ -91,7 +91,7 @@ Payload:
 
 This is the source code for flag 3 endpoint:
 
-![flag 3 source code](/public/012-ninja-ctf.png)
+![flag 3 source code](/public/04/012-ninja-ctf.png)
 
 ### Vulnerability - Flag 3
 
@@ -107,7 +107,7 @@ Since it is a Flask application, Jinja 2 is the templating engine used.
 
 In the Dockerfile provided, we observe that flag 3 is one of the environment variables:
 
-![dockerfile](/public/013-ninja-ctf.png)
+![dockerfile](/public/04/013-ninja-ctf.png)
 
 To access the flag, this is the SSTI payload would be:
 
@@ -115,7 +115,7 @@ To access the flag, this is the SSTI payload would be:
 
 A user was created with the above payload in the name:
 
-![register page with payload](/public/014-ninja-ctf.png)
+![register page with payload](/public/04/014-ninja-ctf.png)
 
 However, we need the admin to use the malicious account to access the page so that the payload is injected.
 
