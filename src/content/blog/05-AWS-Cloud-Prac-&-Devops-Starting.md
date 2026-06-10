@@ -34,7 +34,7 @@ These are some things I did to learn about devops in this project:
 
 ### Pipeline
 
-![Precommit & Github Actions](/public/05/015-blog.png)
+![Precommit & Github Actions](/05/015-blog.png)
 
 Above picture shows what happen during the different stages of the project deployment.
 
