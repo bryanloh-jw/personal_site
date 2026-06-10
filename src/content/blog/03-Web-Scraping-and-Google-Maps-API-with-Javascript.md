@@ -12,7 +12,7 @@ To complete her studies, my wife needed to do clinical placements at various cli
 
 In addition, there was no option to sort by distance or location, only by the alphabetical order of the clinics' names.
 
-![clinic list](/public/03/001-list-of-placements.png)
+![clinic list](/03/001-list-of-placements.png)
 
 ## Digging for information
 
@@ -28,7 +28,7 @@ This Google maps link is how I could generate the distances for each location, b
 
 To scrape the required data, I inspected the network requests and found where the frontend was receiving it.
 
-![network request](/public/03/002-dom.png)
+![network request](/03/002-dom.png)
 
 The data response is a rendered html containing the clinic name, as well as the Google map URL with the query parameters of the addresses.
 
